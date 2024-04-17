@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:globalgoalsapp/screens/forgot_password.dart';
 import 'package:globalgoalsapp/screens/homepage.dart';
 import 'package:globalgoalsapp/screens/signin.dart';
 
@@ -43,7 +44,12 @@ class Login extends StatelessWidget {
                       Align(
                         alignment: Alignment.bottomRight,
                         child:TextButton(
-                        onPressed: () {},
+                        onPressed: () {
+                           Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const ForgotPassword()));
+                        },
                         child: const Text(
                           "Forgot Password?",
                           style: TextStyle(fontSize: 20, color: Colors.red),

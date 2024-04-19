@@ -30,7 +30,7 @@ class _NavigationMenuState extends State<NavigationMenu> {
         children: pages,
       ),
       bottomNavigationBar: AnimatedBottomNavigationBar(
-        icons: [
+        icons: const [
           CupertinoIcons.home,
           CupertinoIcons.settings,
           CupertinoIcons.heart_circle_fill,

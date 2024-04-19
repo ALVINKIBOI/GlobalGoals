@@ -26,7 +26,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 15),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            //crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SizedBox(
                 height: 10,
@@ -88,22 +88,28 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(8))),
               ),
-              Text(
-                "OR",
-                style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+              SizedBox(height: 20,),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text(
+                    "OR",
+                    style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold),
+                  ),
+                         TextButton(
+                            onPressed: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => const OTP()));
+                            },
+                            child: const Text(
+                              "Verify Using Phone Number",
+                              style: TextStyle(fontSize: 20, color: Colors.red),
+                            ),
+                          ),
+                ],
               ),
-                     TextButton(
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const OTP()));
-                        },
-                        child: const Text(
-                          "Verify Using Phone Number",
-                          style: TextStyle(fontSize: 20, color: Colors.red),
-                        ),
-                      ),
             ],
           ),
         ),

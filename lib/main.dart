@@ -1,11 +1,15 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-//import 'package:globalgoalsapp/screens/contactus.dart';
-//import 'package:globalgoalsapp/screens/donations.dart';
-//import 'package:globalgoalsapp/screens/homepage.dart';
-//import 'package:globalgoalsapp/screens/login.dart';
+import 'package:globalgoalsapp/firebase_options.dart';
+import 'package:globalgoalsapp/screens/homepage.dart';
+import 'package:globalgoalsapp/screens/navigation_menu.dart';
+
 import 'package:globalgoalsapp/screens/splashscreen.dart';
 
-void main() {
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+   await Firebase.initializeApp(
+    options:DefaultFirebaseOptions.currentPlatform);
   runApp(const MyApp());
 }
 class MyApp extends StatelessWidget {

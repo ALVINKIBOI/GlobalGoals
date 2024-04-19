@@ -3,8 +3,15 @@ import 'package:globalgoalsapp/screens/forgot_password.dart';
 import 'package:globalgoalsapp/screens/homepage.dart';
 import 'package:globalgoalsapp/screens/signin.dart';
 
-class Login extends StatelessWidget {
+class Login extends StatefulWidget {
   const Login({super.key});
+
+  @override
+  State<Login> createState() => _LoginState();
+}
+
+class _LoginState extends State<Login> {
+  bool passwordObscure = true;
 
   @override
   Widget build(BuildContext context) {
@@ -33,28 +40,35 @@ class Login extends StatelessWidget {
                         height: 20,
                       ),
                       TextFormField(
-                        obscureText: true,
-                        decoration: const InputDecoration(
+                        obscureText: passwordObscure,
+                        decoration: InputDecoration(
                           labelText: "Enter Password",
-                          prefixIcon: Icon(Icons.lock),
-                          suffixIcon: Icon(Icons.remove_red_eye),
-                          border: OutlineInputBorder(),
+                          prefixIcon: const Icon(Icons.lock),
+                          suffixIcon: IconButton(
+                              onPressed: () {
+                                setState(() {
+                                  passwordObscure = !passwordObscure;
+                                });
+                              },
+                              icon: const Icon(Icons.remove_red_eye_outlined)),
+                          border: const OutlineInputBorder(),
                         ),
                       ),
                       Align(
                         alignment: Alignment.bottomRight,
-                        child:TextButton(
-                        onPressed: () {
-                           Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const ForgotPassword()));
-                        },
-                        child: const Text(
-                          "Forgot Password?",
-                          style: TextStyle(fontSize: 20, color: Colors.red),
+                        child: TextButton(
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        const ForgotPassword()));
+                          },
+                          child: const Text(
+                            "Forgot Password?",
+                            style: TextStyle(fontSize: 20, color: Colors.red),
+                          ),
                         ),
-                      ),    
                       ),
                       const SizedBox(
                         height: 30,
@@ -86,7 +100,6 @@ class Login extends StatelessWidget {
                             "Don't have an account?",
                             style: TextStyle(
                               fontSize: 20,
-                              
                               color: Colors.black,
                             ),
                           ),

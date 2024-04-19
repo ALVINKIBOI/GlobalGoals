@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "86324842947",
+    "project_id": "globalgoals-15dc8",
+    "storage_bucket": "globalgoals-15dc8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:86324842947:android:c6f8be9be4f0facd90ed76",
+        "android_client_info": {
+          "package_name": "com.example.globalgoalsapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDR_8QjWE-XgFxBtjvNbIVliIEOeEMbTXY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

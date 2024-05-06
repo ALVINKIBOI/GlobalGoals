@@ -46,6 +46,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '86324842947',
     projectId: 'globalgoals-15dc8',
     authDomain: 'globalgoals-15dc8.firebaseapp.com',
+    databaseURL: 'https://globalgoals-15dc8-default-rtdb.firebaseio.com',
     storageBucket: 'globalgoals-15dc8.appspot.com',
   );
 
@@ -54,6 +55,7 @@ class DefaultFirebaseOptions {
     appId: '1:86324842947:android:c6f8be9be4f0facd90ed76',
     messagingSenderId: '86324842947',
     projectId: 'globalgoals-15dc8',
+    databaseURL: 'https://globalgoals-15dc8-default-rtdb.firebaseio.com',
     storageBucket: 'globalgoals-15dc8.appspot.com',
   );
 
@@ -62,6 +64,7 @@ class DefaultFirebaseOptions {
     appId: '1:86324842947:ios:5da2e36b9ba343e890ed76',
     messagingSenderId: '86324842947',
     projectId: 'globalgoals-15dc8',
+    databaseURL: 'https://globalgoals-15dc8-default-rtdb.firebaseio.com',
     storageBucket: 'globalgoals-15dc8.appspot.com',
     iosBundleId: 'com.example.globalgoalsapp',
   );
@@ -71,6 +74,7 @@ class DefaultFirebaseOptions {
     appId: '1:86324842947:ios:5da2e36b9ba343e890ed76',
     messagingSenderId: '86324842947',
     projectId: 'globalgoals-15dc8',
+    databaseURL: 'https://globalgoals-15dc8-default-rtdb.firebaseio.com',
     storageBucket: 'globalgoals-15dc8.appspot.com',
     iosBundleId: 'com.example.globalgoalsapp',
   );
@@ -81,6 +85,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '86324842947',
     projectId: 'globalgoals-15dc8',
     authDomain: 'globalgoals-15dc8.firebaseapp.com',
+    databaseURL: 'https://globalgoals-15dc8-default-rtdb.firebaseio.com',
     storageBucket: 'globalgoals-15dc8.appspot.com',
   );
+
 }

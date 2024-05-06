@@ -26,7 +26,7 @@ class _DonationsState extends State<Donations> {
       appBar: AppBar(
         title: const Text("Donations"),
         leading: const BackButton(),
-        backgroundColor: Colors.transparent,
+        backgroundColor: Colors.red,
         foregroundColor: Colors.black,
         elevation: 0,
         centerTitle: true,
@@ -274,7 +274,7 @@ class _DonationsState extends State<Donations> {
                       ),
                     ),
                     Text(
-                      "Quality Education",
+                      "",
                       style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.w400,
@@ -294,14 +294,14 @@ class _DonationsState extends State<Donations> {
                       ),
                     );
                   },
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.red,
+                      padding: const EdgeInsets.all(10)),
                   child: const Text(
                     "Proceed to Payment",
                     style: TextStyle(
                     fontWeight: FontWeight.w300, color: Colors.black),
                   ),
-                  style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.orange,
-                      padding: const EdgeInsets.all(10)),
                 ),
               ],
             ),

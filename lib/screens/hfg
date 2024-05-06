@@ -1,0 +1,173 @@
+return Scaffold(
+      backgroundColor: Colors.white10,
+      body: Center(
+        child:StreamBuilder<User?>(
+        stream:FirebaseAuth.instance.authStateChanges(),
+        builder: (context, snapshot){
+          if (snapshot.hasData){
+            return const HomePage();
+          }else{
+            return Login();
+          } 
+        }
+      ), 
+        Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Image.asset("images/icons.jpeg"),
+            const Text("GlobalGoals",
+                  style: TextStyle(
+                    fontSize: 30,
+                    fontWeight: FontWeight.bold
+                  ),
+            ),
+             const Text("Changing the world together",
+                  style: TextStyle(
+                    fontSize: 15,
+                    //fontWeight: FontWeight.bold
+                  ),
+            ),
+            const SizedBox(height: 20),
+            const CircularProgressIndicator(),
+          ],
+        ),
+      ),
+    );
+  }
+}
+    
+
+
+    Future<void>register() async{
+        
+          var snackBar=const SnackBar(content: Text(''));
+          if (_passwordcontroller.text != _confirmpasswordcontroller.text){
+          const Text("password does not match");
+          return;
+          }    
+        try{
+       CollectionReference Users=
+       FirebaseFirestore.instance.collection('Users'); 
+       Users.add({
+          'email':_emailcontroller,
+          'password':_passwordcontroller,
+          'firstName':_firstnamecontroller,
+          'secondName':_secondnamecontroller,  
+        });
+        snackBar=const SnackBar
+        (content:Text("Registration succesful"),
+        backgroundColor: Colors.blue,);
+        
+    }catch (e){
+            snackBar=const SnackBar(
+            content: Text('Registation failed'),
+            backgroundColor: Colors.blue,);
+    }
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+
+
+
+@override
+  void dispose() {
+    _firstnamecontroller.dispose();
+    _secondnamecontroller.dispose();
+    _emailcontroller.dispose();
+    _passwordcontroller.dispose();
+    _confirmpasswordcontroller.dispose();
+    super.dispose();
+  }
+
+  Future signIn() async {
+    if (passwordConfirmed()) {
+      await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        email: _emailcontroller.text.trim(),
+        password: _passwordcontroller.text.trim(),
+      );
+      addUsersDetails(
+        _firstnamecontroller.text.trim(),
+        _secondnamecontroller.text.trim(),
+        _emailcontroller.text.trim(),
+        _passwordcontroller.text.trim(),
+      );
+    }
+  }
+
+  Future addUsersDetails(
+      String firstName, String secondName, String email, dynamic password) async {
+    await FirebaseFirestore.instance.collection("Users").add({
+      'firstName': 'firstName',
+      'secondName': 'secondName',
+      'email': 'email',
+      'password':'password',
+    });
+  }
+
+  bool passwordConfirmed() {
+    if (_passwordcontroller.text.trim() ==
+        _confirmpasswordcontroller.text.trim()) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+
+
+  Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      const NavigationMenu()));
+
+
+                                      Future login() async{
+    await FirebaseAuth.instance.signInWithEmailAndPassword(
+      email:_emailcontroller.text.trim(), 
+      password:_passwordcontroller.text.trim(),
+      );
+  }
+  @override
+  void dispose(){
+    _emailcontroller.dispose();
+    _passwordcontroller.dispose();
+    super.dispose();
+  }
+
+  try {
+      UserCredential userCredential =
+          await _auth.createUserWithEmailAndPassword(
+        email: _email,
+        password: _password,
+      );
+      print('User Registered: $userCredential.Users');
+    } catch (e) {
+      print('Error during Registration: $e');
+
+
+       body: SingleChildScrollView(
+        child: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.only(left: 150, right: 150,top:40),
+            child: Column(
+              //mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                  height: 50,
+                  width:MediaQuery.of(context).size.,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: Image.asset(
+                    "images/icons.png",
+                    height: 30,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}

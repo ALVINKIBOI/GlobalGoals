@@ -1,6 +1,8 @@
+import 'package:email_validator/email_validator.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:globalgoalsapp/screens/OTP.dart';
+//import 'package:globalgoalsapp/screens/OTP.dart';
 import 'package:globalgoalsapp/screens/recovery.dart';
 
 class ForgotPassword extends StatefulWidget {
@@ -10,11 +12,25 @@ class ForgotPassword extends StatefulWidget {
   State<ForgotPassword> createState() => _ForgotPasswordState();
 }
 
-bool cirButton = false;
-
-TextEditingController emailController = TextEditingController();
-
 class _ForgotPasswordState extends State<ForgotPassword> {
+  TextEditingController emailController = TextEditingController();
+  final _formkey = GlobalKey<FormState>();
+
+  String email = "";
+
+  resetpassword() async {
+    try {
+      await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
+      ScaffoldMessenger.of(context).showSnackBar((const SnackBar(
+          content: Text("Password reset email has been sent"))));
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'user not found') {
+        ScaffoldMessenger.of(context).showSnackBar(
+            (const SnackBar(content: Text("No User found for that email"))));
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,93 +40,76 @@ class _ForgotPasswordState extends State<ForgotPassword> {
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 15),
-          child: Column(
-            //crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SizedBox(
-                height: 10,
-              ),
-              Text(
-                "Forgot Password",
-                style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
-              ),
-              SizedBox(
-                height: 50,
-              ),
-              Text(
-                "Please Enter your Email Adress.You will receive a message to create a new password via email",
-                style: TextStyle(
-                  fontSize: 15,
+          padding: const EdgeInsets.symmetric(horizontal: 15),
+          child: Form(
+            key: _formkey,
+            child: Column(
+              //crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const SizedBox(
+                  height: 10,
                 ),
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              TextFormField(
-                controller: emailController,
-                onChanged: (val) {
-                  if (val != "") {
-                    setState(() {
-                      cirButton = true;
-                    });
-                  }
-                },
-                decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                    labelText: "Enter Email",
-                    suffix: InkWell(
-                      onTap: () {
-                        setState(() {
-                          emailController.clear();
-                        });
-                      },
-                      child: Icon(CupertinoIcons.multiply),
-                    )),
-              ),
-              SizedBox(
-                height: 30,
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const Recovery()));
-                },
-                child: const Text(
-                  "Send Code",
-                  style: TextStyle(fontSize: 20, color: Colors.black),
+                const Text(
+                  "Forgot Password",
+                  style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
                 ),
-                style: ElevatedButton.styleFrom(
-                    minimumSize: const Size.fromHeight(55),
-                    backgroundColor: Colors.red,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8))),
-              ),
-              SizedBox(height: 20,),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Text(
-                    "OR",
-                    style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold),
+                const SizedBox(
+                  height: 50,
+                ),
+                const Text(
+                  "Please Enter your Email Adress.You will receive a message to create a new password via email",
+                  style: TextStyle(
+                    fontSize: 25,
                   ),
-                         TextButton(
-                            onPressed: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => const OTP()));
-                            },
-                            child: const Text(
-                              "Verify Using Phone Number",
-                              style: TextStyle(fontSize: 20, color: Colors.red),
-                            ),
-                          ),
-                ],
-              ),
-            ],
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                TextFormField(
+                  controller: emailController,
+                  validator: (value) => EmailValidator.validate(value!)
+                      ? null
+                      : "Please enter a valid email",
+                  decoration: InputDecoration(
+                      border: const OutlineInputBorder(),
+                      labelText: "Enter Email",
+                      suffix: InkWell(
+                        onTap: () {
+                          setState(() {
+                            emailController.clear();
+                          });
+                        },
+                        child: const Icon(CupertinoIcons.multiply),
+                      )),
+                ),
+                const SizedBox(
+                  height: 30,
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    if (_formkey.currentState!.validate()) {
+                      setState(() {
+                        email = emailController.text.trim();
+                      });
+                    }
+                    resetpassword();
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const Recovery()));
+                  },
+                  style: ElevatedButton.styleFrom(
+                      minimumSize: const Size.fromHeight(55),
+                      backgroundColor: Colors.red,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8))),
+                  child: const Text(
+                    "Send Email",
+                    style: TextStyle(fontSize: 20, color: Colors.black),
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),

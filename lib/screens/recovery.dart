@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/material.dart';
 
 class Recovery extends StatefulWidget {
@@ -62,17 +62,16 @@ class _RecoveryState extends State<Recovery> {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => const Recovery()));
-                },
-                child: const Text(
-                  "Send Code",
-                  style: TextStyle(fontSize: 20, color: Colors.black),
-                ),
+                          builder: (context) => const Recovery()));},
                 style: ElevatedButton.styleFrom(
                     minimumSize: const Size.fromHeight(55),
                     backgroundColor: Colors.red,
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(8))),
+                child: const Text(
+                  "Send Code",
+                  style: TextStyle(fontSize: 20, color: Colors.black),
+                ),
               ),
             ],
           ),

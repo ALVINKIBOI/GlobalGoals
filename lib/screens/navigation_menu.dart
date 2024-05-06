@@ -1,10 +1,9 @@
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:globalgoalsapp/screens/Account.dart';
+import 'package:globalgoalsapp/screens/account.dart';
 import 'package:globalgoalsapp/screens/donations.dart';
 import 'package:globalgoalsapp/screens/homepage.dart';
-import 'package:globalgoalsapp/screens/settings.dart';
 
 class NavigationMenu extends StatefulWidget {
   const NavigationMenu({super.key});
@@ -18,9 +17,8 @@ class _NavigationMenuState extends State<NavigationMenu> {
 
   List<Widget> pages = [
     const HomePage(),
-    const Setting(),
     const Donations(),
-    const Account(),
+    const account(),
   ];
   @override
   Widget build(BuildContext context) {
@@ -32,7 +30,6 @@ class _NavigationMenuState extends State<NavigationMenu> {
       bottomNavigationBar: AnimatedBottomNavigationBar(
         icons: const [
           CupertinoIcons.home,
-          CupertinoIcons.settings,
           CupertinoIcons.heart_circle_fill,
           CupertinoIcons.person,
         ],
